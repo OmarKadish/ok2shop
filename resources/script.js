@@ -1,19 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const addToCartButtons = document.querySelectorAll(".add-to-cart");
-    const checkoutButton = document.getElementById("checkout");
-    const cartContainer = document.querySelector('#cart-container');
-    const cartItems = cartContainer.querySelectorAll(".cart-item");
-
-    let totalAmount = 0;
-    cartContainer.addEventListener("load", ()=> {
-        cartItems.forEach((cartItem) =>{
-            let price = parseFloat(cartItem.querySelector('.price').value);
-            totalAmount += price * parseInt(cartItem.querySelector('.quantity').value);
-            document.getElementById("total").textContent = `Amount: $${totalAmount}`;
-        });
-    })
-
 
     addToCartButtons.forEach((button) => {
         button.addEventListener("click", (e) => {
@@ -21,8 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Hello");
             const productDiv = e.target.closest(".product");
             const productId = productDiv.getAttribute("data-id");
-            const productName = productDiv.getAttribute("data-name");
-            const productPrice = parseFloat(productDiv.getAttribute("data-price"));
+            //const productName = productDiv.getAttribute("data-name");
+            //const productPrice = parseFloat(productDiv.getAttribute("data-price"));
 
             const selectedOption = productDiv.querySelector(".product-option").value;
             $.ajax({
@@ -45,22 +32,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     });
+    // --- Cart Total Calculation (For cart.php) ---
+    const cartContainer = document.querySelector('#cart-container');
+    if (cartContainer) {
+        updateCartTotal();
+    }
+
+    const checkoutButton = document.getElementById("checkout");
+    const cartItems = cartContainer.querySelectorAll(".cart-item");
+
+    function updateCartTotal() {
+        let total = 0;
+        const prices = document.querySelectorAll(".item-total-price");
+        prices.forEach(p => {
+            total += parseFloat(p.innerText.replace('$', ''));
+        });
+        const totalDisplay = document.getElementById("total-amount");
+        if(totalDisplay) totalDisplay.innerText = `$${total.toFixed(2)}`;
+    }
 
     // function updateCartUI() {
     //     cartContainer.innerHTML = ""; // Clear previous items
     //     let totalAmount = 0;
-
-    //     if (cart.length === 0) {
+    //     console.log("hi cart");
+    //
+    //     if (cartItems.length === 0) {
     //         cartContainer.innerHTML = "<p>Your cart is empty.</p>";
     //         return;
     //     }
-
-    //     cart.forEach((item, index) => {
+    //
+    //     cartItems.forEach((item, index) => {
     //         totalAmount += item.price * item.quantity;
-
+    //
     //         const cartItem = document.createElement('div');
     //         cartItem.classList.add('cart-item');
-
+    //
     //         cartItem.innerHTML = `
     //             <img src="images/product${item.id}.jpg" alt="${item.name}">
     //             <div class="cart-item-details">
@@ -70,17 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
     //             </div>
     //             <button class="remove-btn" data-index="${index}">Remove</button>
     //         `;
-
+    //
     //         cartContainer.appendChild(cartItem);
     //     });
     //     document.querySelector("#total h4").textContent = `Amount: $${totalAmount}`;
     // }
-
+    //
     // document.querySelectorAll('.remove-btn').forEach(button => {
     //     button.addEventListener('click', event => {
     //         const index = event.target.dataset.index;
-    //         cart.splice(index, 1);
-    //         localStorage.setItem('cart', JSON.stringify(cart));
+    //         cartItems.splice(index, 1);
+    //         localStorage.setItem('cart', JSON.stringify(cartItems));
     //         updateCartUI();
     //     });
     // });

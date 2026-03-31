@@ -1,5 +1,6 @@
 <?php
 require("./server/db.php");
+include ("./server/config.php");
 // Fetch all products
 $query = "SELECT * FROM products";
 $stmt = $conn->query($query);
@@ -9,6 +10,19 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="OK2shop An Online shopping platform">
+    <meta name="author" content="Omar Kadish">
+    <title>Omar's Shop</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="./resources/css/styles.css">
+    <link rel="stylesheet" href="../resources/css/<?php echo $theme; ?>">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
 <?php include('./layout/header.php'); ?>
 
 <section id="main-content">
