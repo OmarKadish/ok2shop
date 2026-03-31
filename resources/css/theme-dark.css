@@ -1,0 +1,12 @@
+:root {
+    --dark-bg: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #e0e0e0;
+    --accent: #bb86fc;
+}
+
+body { background-color: var(--dark-bg); color: var(--text-color); }
+header { background-color: #252525; color: white; }
+.product { background-color: var(--card-bg); color: white; border: none; }
+#shopName a { color: var(--accent); }
+.add-to-cart { background-color: var(--accent); color: #000; }

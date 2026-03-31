@@ -1,0 +1,11 @@
+:root {
+    --festive-red: #c0392b;
+    --gold: #f1c40f;
+    --snow: #fffafa;
+}
+
+body { background-color: var(--snow); }
+header { background-color: var(--festive-red); }
+header a, header i { color: var(--gold) !important; }
+.add-to-cart { background-color: var(--gold); color: #2c3e50; }
+.product { border: 2px solid #eee; }
