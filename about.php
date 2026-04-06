@@ -1,5 +1,5 @@
 <?php
-include('./server/config.php');
+include('./config.php');
 
 ?>
     <!DOCTYPE html>
@@ -20,7 +20,7 @@ include('./server/config.php');
 <body>
 <?php include('./layout/header.php'); ?>
 
-    <section class="content">
+    <section class="about-content">
         <h1>About OK2Shop</h1>
 
         <p>

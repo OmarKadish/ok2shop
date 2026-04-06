@@ -19,7 +19,7 @@ a{
     color:inherit;
 }
 
-.content{
+.about-content{
     padding:10px 15px;
 }
 
@@ -56,6 +56,7 @@ a{
 
 #main-content{
     padding:40px;
+    min-height: 100%;
 }
 
 /* PRODUCTS GRID */

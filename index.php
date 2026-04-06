@@ -1,6 +1,6 @@
 <?php
-require("./server/db.php");
-include ("./server/config.php");
+include("./config.php");
+require(ROOT_PATH."/server/db.php");
 // Fetch all products
 $query = "SELECT * FROM products";
 $stmt = $conn->query($query);
@@ -36,7 +36,7 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                  data-id="<?php echo $product['id'] ?>"
                  data-name="<?php echo $product['name'] ?>"
                  data-price="<?php echo $product['price'] ?>">
-                <img src="./images/<?php echo $product['image'] ?>" alt="<?php echo $product['description'] ?>">
+                <img src="./resources/images/<?php echo $product['image'] ?>" alt="<?php echo $product['description'] ?>">
                 <h2><?php echo $product['name'] ?></h2>
                 <p><?php echo $product['price'] ?></p>
                 <select class="product-option" style="margin-bottom: 10px; width: 80%;">

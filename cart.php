@@ -1,6 +1,6 @@
 <?php
-require_once("./server/db.php");
-include ("./server/config.php");
+include("./config.php");
+require_once(ROOT_PATH."/server/db.php");
 
 if (!isset($_SESSION['user_id'])) {
     echo "<p>Please <a href='server/login.php'>login</a> to view your cart.</p>";
@@ -46,7 +46,7 @@ $cart_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 foreach ($cart_items as $item):
                     $item_total = $item['price'] * $item['quantity'];
                     echo '<div class="cart-item">
-                        <h2>' . $item['name'] . '</h2>
+                        <h2>' . htmlspecialchars($item['name']) . '</h2>
                         <p class= "price">Unit Price:' . number_format($item['price'], 2) . '</p>
                         <p class="quantity">Quantity:' . $item['quantity'] . '</p>
                         <p class="item-total-price">$ '. number_format($item_total, 2) .'</p>

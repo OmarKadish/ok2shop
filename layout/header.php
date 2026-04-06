@@ -19,9 +19,10 @@
             <div style="display: inline-flex;" id="user">
                 <a href="../cart.php"><i class="material-icons">shopping_cart</i></a>
                 <?php if (isset($_SESSION['user_id'])) :
+                    echo '<a class="link" href="../admin/index.php">Dashboard</a>';
                     echo '<a class="link" href="../server/logout.php" style="color: #e74c3c;">logout</a>';
                 ?>
-                <?php include('./admin/themes.php'); ?>
+                <?php include(ROOT_PATH.'/admin/themes.php'); ?>
                 <?php else:
                     echo '<a href="../server/register.php">Register</a> | ';
                     echo '<a href="../server/login.php">Login</a>';

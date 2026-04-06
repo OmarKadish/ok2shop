@@ -4,6 +4,7 @@ CREATE TABLE users
     first_name VARCHAR(50),
     last_name  VARCHAR(50),
     email      VARCHAR(100) UNIQUE,
+    is_admin TINYINT(1) DEFAULT 0,
     address    TEXT,
     phone      VARCHAR(20),
     password   VARCHAR(255)
@@ -12,6 +13,8 @@ CREATE TABLE users
 -- user info:
 -- email: omar@gmail.com
 -- password: 123456789
+-- Set myself as admin
+UPDATE users SET is_admin = 1 WHERE email = 'omar@gmail.com';
 
 CREATE TABLE cart
 (
