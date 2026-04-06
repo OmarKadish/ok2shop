@@ -20,9 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     'type': "add",
                     'product_id': productId,
                     'quantity': 1,
-                    'option': selectedOption },
+                    'option': selectedOption
+                },
                 success: function (res) {
-                    if(res.success) {
+                    if (res.success) {
                         alert(productName + ' (' + selectedOption + ') added to cart!');
                     } else {
                         alert('Error: ' + res.message);
@@ -32,11 +33,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     });
-    // --- Cart Total Calculation (For cart.php) ---
-    const cartContainer = document.querySelector('#cart-container');
-    if (cartContainer) {
+    // --- Cart Total Calculation and remove function implementation (For cart.php) ---
+    // const cartContainer = document.querySelector('#cart-container');
+    const removeButtons = document.querySelectorAll(".remove-btn");
+    removeButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("Hello");
+            const itemId = e.target.getAttribute("data-id");
+            const cartItem = e.target.closest(".cart-item");
+            $.ajax({
+                type: "POST",
+                url: "./server/save_cart.php",
+                dataType: "json",
+                data: {
+                    'type': "remove",
+                    'cart_id': itemId
+                },
+                success: function (res) {
+                    if (res.success) {
+                        cartItem.remove();       // Remove the element from the DOM
+                        updateCartTotal();       // Recalculate total
+                    } else {
+                        alert('Error: ' + res.message);
+                    }
+                },
+                error: function () {
+                    alert('Request failed. Please try again.');
+                }
+            });
+        });
         updateCartTotal();
-    }
+
+    });
 
     const checkoutButton = document.getElementById("checkout");
     const cartItems = cartContainer.querySelectorAll(".cart-item");
@@ -48,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
             total += parseFloat(p.innerText.replace('$', ''));
         });
         const totalDisplay = document.getElementById("total-amount");
-        if(totalDisplay) totalDisplay.innerText = `$${total.toFixed(2)}`;
+        if (totalDisplay) totalDisplay.innerText = `$${total.toFixed(2)}`;
     }
 
     // function updateCartUI() {
